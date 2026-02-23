@@ -1,0 +1,4 @@
+# Data directory
+# This directory stores:
+# - dedup.db: 已处理文章ID数据库
+# - pending_articles.json: 待处理文章队列

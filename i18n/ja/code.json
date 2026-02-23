@@ -1,0 +1,54 @@
+{
+  "theme.NotFound.title": {
+    "message": "ページが見つかりません",
+    "description": "404ページタイトル"
+  },
+  "theme.NotFound.p1": {
+    "message": "お探しのページが見つかりませんでした。",
+    "description": "404ページ第一段落"
+  },
+  "theme.NotFound.p2": {
+    "message": "サイトの所有者に連絡して、リンクが壊れていることをお知らせください。",
+    "description": "404ページ第二段落"
+  },
+  "theme.blog.paginator.navAriaLabel": {
+    "message": "ブログ記事ページネーション",
+    "description": "ブログページネーションのARIAラベル"
+  },
+  "theme.blog.paginator.newerEntries": {
+    "message": "新しい記事",
+    "description": "ブログページネーション-新しい記事ラベル"
+  },
+  "theme.blog.paginator.olderEntries": {
+    "message": "古い記事",
+    "description": "ブログページネーション-古い記事ラベル"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "約{readingTime}分で読めます",
+    "description": "読書時間"
+  },
+  "theme.blog.post.readMore": {
+    "message": "続きを読む",
+    "description": "もっと読むボタン"
+  },
+  "theme.blog.sidebar.navAriaLabel": {
+    "message": "最近のブログ記事ナビゲーション",
+    "description": "サイドバーARIAラベル"
+  },
+  "theme.tags.tagsListLabel": {
+    "message": "タグ：",
+    "description": "タグリストラベル"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "コードをクリップボードにコピー",
+    "description": "コピーボタンARIAラベル"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "コピーしました",
+    "description": "コピー成功メッセージ"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "コピー",
+    "description": "コピーボタン"
+  }
+}

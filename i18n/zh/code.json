@@ -1,0 +1,54 @@
+{
+  "theme.NotFound.title": {
+    "message": "页面未找到",
+    "description": "404页面标题"
+  },
+  "theme.NotFound.p1": {
+    "message": "我们找不到您要找的页面。",
+    "description": "404页面第一段"
+  },
+  "theme.NotFound.p2": {
+    "message": "请联系网站所有者并告知他们链接到的页面已失效。",
+    "description": "404页面第二段"
+  },
+  "theme.blog.paginator.navAriaLabel": {
+    "message": "博客文章分页导航",
+    "description": "博客分页的ARIA标签"
+  },
+  "theme.blog.paginator.newerEntries": {
+    "message": "较新的文章",
+    "description": "博客分页-新文章标签"
+  },
+  "theme.blog.paginator.olderEntries": {
+    "message": "较早的文章",
+    "description": "博客分页-旧文章标签"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "阅读约 {readingTime} 分钟",
+    "description": "阅读时间"
+  },
+  "theme.blog.post.readMore": {
+    "message": "阅读更多",
+    "description": "阅读更多按钮"
+  },
+  "theme.blog.sidebar.navAriaLabel": {
+    "message": "最近博文导航",
+    "description": "侧边栏ARIA标签"
+  },
+  "theme.tags.tagsListLabel": {
+    "message": "标签：",
+    "description": "标签列表标签"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "复制代码到剪贴板",
+    "description": "复制按钮ARIA标签"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "已复制",
+    "description": "复制成功提示"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "复制",
+    "description": "复制按钮"
+  }
+}

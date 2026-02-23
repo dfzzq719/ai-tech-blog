@@ -1,0 +1,90 @@
+name: Daily AI Blog Post
+
+on:
+  # 每天北京时间 8:00 执行 (UTC 0:00)
+  schedule:
+    - cron: '0 0 * * *'
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      max_articles:
+        description: '最大文章数'
+        required: false
+        default: '3'
+      skip_audio:
+        description: '跳过音频生成'
+        required: false
+        default: 'false'
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Python dependencies
+        run: |
+          cd automation
+          pip install -r requirements.txt
+      
+      - name: Install Node dependencies
+        run: npm ci
+      
+      - name: Run automation pipeline
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+        run: |
+          cd automation
+          max_articles=${{ github.event.inputs.max_articles || '3' }}
+          skip_audio=${{ github.event.inputs.skip_audio || 'false' }}
+          
+          if [ "$skip_audio" = "true" ]; then
+            python main.py --max $max_articles --skip-audio
+          else
+            python main.py --max $max_articles
+          fi
+      
+      - name: Build Docusaurus
+        run: npm run build
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: auto-generate blog posts [skip ci]"
+          git push
+      
+      # 部署到服务器
+      - name: Deploy to server
+        if: success()
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /opt/aiblog
+            docker-compose pull
+            docker-compose up -d --build
+            docker image prune -f

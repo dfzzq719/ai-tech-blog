@@ -1,0 +1,8 @@
+ai-editor:
+  name: AI Editor
+  title: Automated Content Curator
+  url: https://github.com/your-org
+  image_url: https://avatars.githubusercontent.com/u/0
+  page: true
+  socials:
+    github: your-org

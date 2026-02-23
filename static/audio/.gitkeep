@@ -1,0 +1,12 @@
+# Audio Files
+This directory contains TTS-generated audio files for blog posts.
+
+Structure:
+```
+audio/
+├── 2026-02-23-welcome/
+│   ├── en.mp3
+│   ├── zh.mp3
+│   └── ja.mp3
+└── ...
+```
