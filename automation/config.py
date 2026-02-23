@@ -4,6 +4,19 @@ AI Tech Blog 自动化配置
 import os
 from pathlib import Path
 
+# 加载 .env 文件
+def load_env():
+    env_path = Path(__file__).parent / ".env"
+    if env_path.exists():
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = line.split('=', 1)
+                    os.environ.setdefault(key.strip(), value.strip())
+
+load_env()
+
 # 项目根目录
 PROJECT_ROOT = Path(__file__).parent.parent
 BLOG_DIR = PROJECT_ROOT / "blog"

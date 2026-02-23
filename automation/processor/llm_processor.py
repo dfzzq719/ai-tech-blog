@@ -84,16 +84,24 @@ class LLMProcessor:
             self.client = OpenAI(**client_kwargs)
             logger.info(f"LLM 已初始化: {self.provider} - {self.config['model']}")
     
-    def process_article(self, article_data: Dict) -> Optional[ProcessedArticle]:
+    def process_article(self, article_data) -> Optional[ProcessedArticle]:
         """处理单篇文章"""
         if not self.client:
             return self._mock_process(article_data)
         
         try:
+            # 支持 dict 或 dataclass 对象
+            if hasattr(article_data, 'to_dict'):
+                article_dict = article_data.to_dict()
+            elif hasattr(article_data, '__dict__'):
+                article_dict = article_data.__dict__
+            else:
+                article_dict = article_data
+            
             prompt = PROCESSING_PROMPT.format(
-                original_title=article_data.get('title', ''),
-                source_name=article_data.get('source', ''),
-                raw_content=article_data.get('content', '')[:6000]  # 限制输入长度
+                original_title=article_dict.get('title', ''),
+                source_name=article_dict.get('source', ''),
+                raw_content=article_dict.get('content', '')[:6000]  # 限制输入长度
             )
             
             response = self.client.chat.completions.create(
@@ -115,34 +123,61 @@ class LLMProcessor:
             elif '```' in result_text:
                 result_text = result_text.split('```')[1].split('```')[0]
             
-            result = json.loads(result_text.strip())
+            # 清理和修复 JSON
+            result_text = result_text.strip()
+            
+            try:
+                result = json.loads(result_text)
+            except json.JSONDecodeError as e:
+                # 尝试修复常见的 JSON 问题
+                import re
+                # 提取各个字段
+                title_match = re.search(r'"title"\s*:\s*"([^"]*)"', result_text, re.DOTALL)
+                summary_match = re.search(r'"summary"\s*:\s*"([^"]*)"', result_text, re.DOTALL)
+                content_match = re.search(r'"content"\s*:\s*"(.+?)"\s*,\s*"keywords"', result_text, re.DOTALL)
+                keywords_match = re.search(r'"keywords"\s*:\s*\[(.*?)\]', result_text, re.DOTALL)
+                
+                result = {
+                    'title': title_match.group(1) if title_match else article_dict.get('title', ''),
+                    'summary': summary_match.group(1) if summary_match else '',
+                    'content': content_match.group(1) if content_match else result_text,
+                    'keywords': keywords_match.group(1).replace('"', '').split(',') if keywords_match else ['AI']
+                }
             
             return ProcessedArticle(
-                original_title=article_data.get('title', ''),
-                title=result.get('title', article_data.get('title', '')),
+                original_title=article_dict.get('title', ''),
+                title=result.get('title', article_dict.get('title', '')),
                 summary=result.get('summary', ''),
                 content=result.get('content', ''),
                 keywords=result.get('keywords', []),
-                category=article_data.get('category', 'AI'),
-                source_url=article_data.get('url', ''),
-                source_name=article_data.get('source', '')
+                category=article_dict.get('category', 'AI'),
+                source_url=article_dict.get('url', ''),
+                source_name=article_dict.get('source', '')
             )
             
         except Exception as e:
             logger.error(f"LLM 处理失败: {e}")
             return None
     
-    def _mock_process(self, article_data: Dict) -> ProcessedArticle:
+    def _mock_process(self, article_data) -> ProcessedArticle:
         """模拟处理（无 API Key 时使用）"""
+        # 支持 dict 或 dataclass 对象
+        if hasattr(article_data, 'to_dict'):
+            article_dict = article_data.to_dict()
+        elif hasattr(article_data, '__dict__'):
+            article_dict = article_data.__dict__
+        else:
+            article_dict = article_data
+        
         return ProcessedArticle(
-            original_title=article_data.get('title', ''),
-            title=f"[Analysis] {article_data.get('title', '')}",
-            summary=article_data.get('summary', '')[:200],
-            content=article_data.get('content', '')[:2000],
+            original_title=article_dict.get('title', ''),
+            title=f"[Analysis] {article_dict.get('title', '')}",
+            summary=article_dict.get('summary', '')[:200],
+            content=article_dict.get('content', '')[:2000],
             keywords=['AI', 'Technology'],
-            category=article_data.get('category', 'AI'),
-            source_url=article_data.get('url', ''),
-            source_name=article_data.get('source', '')
+            category=article_dict.get('category', 'AI'),
+            source_url=article_dict.get('url', ''),
+            source_name=article_dict.get('source', '')
         )
     
     def process_batch(self, articles: list) -> list:
