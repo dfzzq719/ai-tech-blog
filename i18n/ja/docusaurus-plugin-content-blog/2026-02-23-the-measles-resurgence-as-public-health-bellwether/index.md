@@ -1,17 +1,36 @@
 ---
 slug: the-measles-resurgence-as-public-health-bellwether
-title: "[日本語翻訳] The Measles Resurgence as Public Health Bellwether: Analyzing Declining Vaccination Rates and Broade..."
+title: "麻疹の再燃：公衆衛生の警告信号"
 authors: [ai-editor]
-tags: ["AI"]
-description: "[日本語翻訳] The resurgence of measles outbreaks in multiple countries signals a troubling decline in vaccination..."
+tags: ["公衆衛生", "予防接種", "麻疹"]
+description: "複数の国での麻疹の再燃は、ワクチン接種率の懸念すべき低下を示しています。"
 source_url: https://www.technologyreview.com/2026/02/20/1133365/measles-cases-rising-vaccine-preventable-infections-mumps-hepatitis-b/
 source_name: MIT Technology Review AI
 ---
 
-# [日本語翻訳] The Measles Resurgence as Public Health Bellwether: Analyzing Declining Vaccination Rates and Broade...
+# 麻疹の再燃：公衆衛生の警告信号
 
-
-[日本語翻訳] {
-    "title": "The Measles Resurgence as Public Health Bellwether: Analyzing Declining Vaccination ...
+複数の国での麻疹の再燃は、ワクチン接種率の懸念すべき低下を示しています。この傾向は、予防可能な疾患に対する数十年の進歩を脅かしています。
 
 <!-- truncate -->
+
+## はじめに：世界保健の警告信号
+
+複数の大陸での最近の麻疹の発生は、単なる孤立した公衆衛生事件ではなく、予防接種システムの悪化とワクチン躊躇の増大の重要な指標です。
+
+## 麻疹伝播の技術的現実
+
+麻疹は最も感染力の強い人間の病気の一つであり、基本再生産数（R₀）は12〜18と推定されています。この極めて高い感染力は、アウトブレイクを防ぐために約95%のワクチン接種率が必要であることを意味します。
+
+## ワクチン躊躇：多因子的な課題
+
+ワクチン接種率の低下は、社会的、心理的、情報的要因の複雑な相互作用の結果です：
+
+1. **情報環境**：デジタルプラットフォームを通じた誤情報
+2. **慢心**：疾患が一般的でなくなるにつれ、認識されるリスクが低下
+3. **アクセスの障壁**：医療アクセスの格差
+4. **信頼の欠如**：機関への信頼の低下
+
+## 結論
+
+麻疹の再燃は単なる統計的な異常ではなく、予防可能な疾患に対する集団免疫の維持における根本的な課題を示しています。

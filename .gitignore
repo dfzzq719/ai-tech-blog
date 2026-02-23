@@ -39,3 +39,6 @@ automation/data/*.json
 .vscode/
 *.swp
 *.swo
+
+# Project Management (local only - 不提交到git)
+PROJECT_MANAGEMENT.md

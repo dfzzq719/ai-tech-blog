@@ -1,17 +1,36 @@
 ---
 slug: the-measles-resurgence-as-public-health-bellwether
-title: "[中文翻译] The Measles Resurgence as Public Health Bellwether: Analyzing Declining Vaccination Rates and Broade..."
+title: "麻疹卷土重来：公共卫生的警示信号"
 authors: [ai-editor]
-tags: ["AI"]
-description: "[中文翻译] The resurgence of measles outbreaks in multiple countries signals a troubling decline in vaccination..."
+tags: ["公共卫生", "疫苗接种", "麻疹"]
+description: "麻疹疫情在多国卷土重来，标志着疫苗接种率因疫苗犹豫而令人担忧地下降。"
 source_url: https://www.technologyreview.com/2026/02/20/1133365/measles-cases-rising-vaccine-preventable-infections-mumps-hepatitis-b/
 source_name: MIT Technology Review AI
 ---
 
-# [中文翻译] The Measles Resurgence as Public Health Bellwether: Analyzing Declining Vaccination Rates and Broade...
+# 麻疹卷土重来：公共卫生的警示信号
 
-
-[中文翻译] {
-    "title": "The Measles Resurgence as Public Health Bellwether: Analyzing Declining Vaccination ...
+麻疹疫情在多国卷土重来，标志着疫苗接种率因疫苗犹豫而令人担忧地下降。这一趋势威胁着数十年来在预防疾病方面取得的进展。
 
 <!-- truncate -->
+
+## 引言：全球健康的预警信号
+
+近期在多个大洲爆发的麻疹疫情不仅仅是孤立的公共卫生事件，更是免疫接种系统恶化和疫苗犹豫日益严重的关键指标。
+
+## 麻疹传播的技术现实
+
+麻疹是最具传染性的人类疾病之一，基本传染数（R₀）估计在12-18之间。这种极高的传染性意味着需要约95%的疫苗接种率才能预防疫情爆发。
+
+## 疫苗犹豫：多因素挑战
+
+疫苗接种率下降是社会、心理和信息因素复杂相互作用的结果：
+
+1. **信息环境**：数字平台上的错误信息传播
+2. **自满心理**：随着疾病减少，感知风险降低
+3. **获取障碍**：医疗保健获取差异
+4. **信任缺失**：对机构信任的侵蚀
+
+## 结论
+
+麻疹的卷土重来不仅仅是一个统计异常——它标志着在维持人群对可预防疾病免疫力方面面临根本性挑战。
