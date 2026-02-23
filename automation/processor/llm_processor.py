@@ -12,7 +12,7 @@ try:
 except ImportError:
     OpenAI = None
 
-from config import LLM_CONFIG, OPENAI_API_KEY
+from config import LLM_CONFIG, LLM_API_KEY, LLM_PROVIDER
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -66,14 +66,23 @@ Content:
 
 class LLMProcessor:
     """LLM 内容处理器"""
-    
+
     def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or OPENAI_API_KEY
+        self.api_key = api_key or LLM_API_KEY
+        self.provider = LLM_PROVIDER
+        self.config = LLM_CONFIG
+
         if not self.api_key:
-            logger.warning("未配置 OPENAI_API_KEY，将使用模拟模式")
+            logger.warning(f"未配置 LLM_API_KEY，将使用模拟模式")
             self.client = None
         else:
-            self.client = OpenAI(api_key=self.api_key)
+            # 支持不同 LLM 提供商（都兼容 OpenAI 格式）
+            client_kwargs = {"api_key": self.api_key}
+            if self.config.get("base_url"):
+                client_kwargs["base_url"] = self.config["base_url"]
+
+            self.client = OpenAI(**client_kwargs)
+            logger.info(f"LLM 已初始化: {self.provider} - {self.config['model']}")
     
     def process_article(self, article_data: Dict) -> Optional[ProcessedArticle]:
         """处理单篇文章"""

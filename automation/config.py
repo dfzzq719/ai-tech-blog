@@ -70,12 +70,32 @@ CONTENT_CONFIG = {
     "posts_per_day": 3,         # 每天发布数量
 }
 
-# LLM 配置
-LLM_CONFIG = {
-    "model": "gpt-4o-mini",
-    "temperature": 0.7,
-    "max_tokens": 2000,
+# LLM 配置 - 支持 OpenAI / GLM / DeepSeek
+# LLM_PROVIDER: "openai" | "glm" | "deepseek"
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "deepseek")
+
+LLM_CONFIGS = {
+    "openai": {
+        "base_url": None,  # 使用默认值
+        "model": "gpt-4o-mini",
+        "temperature": 0.7,
+        "max_tokens": 2000,
+    },
+    "glm": {
+        "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+        "model": "glm-4-flash",  # 或 glm-4-plus
+        "temperature": 0.7,
+        "max_tokens": 2000,
+    },
+    "deepseek": {
+        "base_url": "https://api.deepseek.com",
+        "model": "deepseek-chat",
+        "temperature": 0.7,
+        "max_tokens": 2000,
+    },
 }
+
+LLM_CONFIG = LLM_CONFIGS.get(LLM_PROVIDER, LLM_CONFIGS["deepseek"])
 
 # 翻译配置
 TRANSLATION_CONFIG = {
@@ -87,5 +107,6 @@ TRANSLATION_CONFIG = {
 DEDUP_DB_PATH = PROJECT_ROOT / "automation" / "data" / "dedup.db"
 
 # API Keys (从环境变量读取)
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+# LLM_API_KEY: 通用密钥，根据 LLM_PROVIDER 自动选择
+LLM_API_KEY = os.getenv("LLM_API_KEY", "") or os.getenv("DEEPSEEK_API_KEY", "") or os.getenv("GLM_API_KEY", "") or os.getenv("OPENAI_API_KEY", "")
 DEEPL_API_KEY = os.getenv("DEEPL_API_KEY", "")
