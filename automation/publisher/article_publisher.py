@@ -33,12 +33,15 @@ class ArticlePublisher:
     def _generate_frontmatter(self, title: str, summary: str, keywords: List[str], source_url: str, source_name: str) -> str:
         """生成 YAML frontmatter"""
         keywords_str = ', '.join(f'"{kw}"' for kw in keywords)
+        # 转义引号
+        escaped_title = title.replace('"', '\\"')
+        escaped_summary = summary.replace('"', '\\"')[:160]
         return f'''---
 slug: {self._generate_slug(title)}
-title: "{title.replace('"', '\\"')}"
+title: "{escaped_title}"
 authors: [ai-editor]
 tags: [{keywords_str}]
-description: "{summary.replace('"', '\\"')[:160]}"
+description: "{escaped_summary}"
 source_url: {source_url}
 source_name: {source_name}
 ---
